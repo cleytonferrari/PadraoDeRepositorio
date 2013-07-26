@@ -1,43 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TISelvagem.Dominio;
-using TiSelvagem.Repositorio;
+using TISelvagem.Dominio.Contratos;
 
 namespace TISelvagem.Aplicacao
 {
     public class AlunoAplicacao
     {
-        private Contexto contexto;
+
+        private readonly IRepositorio<Aluno> repositorio;
+
+        public AlunoAplicacao(IRepositorio<Aluno> repo)
+        {
+            repositorio = repo;
+        }
 
         private void Inserir(Aluno aluno)
         {
-            var strQuery = "";
-            strQuery += " INSERT INTO ALUNO (Nome, Mae, DataNascimento) ";
-            strQuery += string.Format(" VALUES ('{0}','{1}','{2}') ",
-                aluno.Nome, aluno.Mae, aluno.DataNascimento
-                );
-            using (contexto = new Contexto())
-            {
-                contexto.ExecutaComando(strQuery);
-            }
+            repositorio.Salvar(aluno);
         }
 
         private void Alterar(Aluno aluno)
         {
-            var strQuery = "";
-            strQuery += " UPDATE ALUNO SET ";
-            strQuery += string.Format(" Nome = '{0}', ", aluno.Nome);
-            strQuery += string.Format(" Mae = '{0}', ", aluno.Mae);
-            strQuery += string.Format(" DataNascimento = '{0}' ", aluno.DataNascimento);
-            strQuery += string.Format(" WHERE AlunoId = {0} ", aluno.Id);
-            using (contexto = new Contexto())
-            {
-                contexto.ExecutaComando(strQuery);
-            }
+            repositorio.Alterar(aluno);
         }
 
         public void Salvar(Aluno aluno)
@@ -48,41 +32,16 @@ namespace TISelvagem.Aplicacao
                 Inserir(aluno);
         }
 
-        public void Excluir(int id)
+        public void Excluir(Aluno aluno)
         {
-            using (contexto = new Contexto())
-            {
-                var strQuery = string.Format(" DELETE FROM ALUNO WHERE AlunoId = {0}", id);
-                contexto.ExecutaComando(strQuery);
-            }
+            repositorio.Excluir(aluno);
         }
 
-        public List<Aluno> ListarTodos()
+        public IEnumerable<Aluno> ListarTodos()
         {
-            using (contexto = new Contexto())
-            {
-                var strQuery = " SELECT * FROM ALUNO ";
-                var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
-                return TransformaReaderEmListaDeObjeto(retornoDataReader);
-            }
+            return repositorio.BuscarTodos();
         }
 
-        private List<Aluno> TransformaReaderEmListaDeObjeto(SqlDataReader reader)
-        {
-            var alunos = new List<Aluno>();
-            while (reader.Read())
-            {
-                var temObjeto = new Aluno()
-                                    {
-                                        Id = int.Parse(reader["AlunoId"].ToString()),
-                                        Nome = reader["Nome"].ToString(),
-                                        Mae = reader["Mae"].ToString(),
-                                        DataNascimento = DateTime.Parse(reader["DataNascimento"].ToString())
-                                    };
-                alunos.Add(temObjeto);
-            }
-            reader.Close();
-            return alunos;
-        }
+
     }
 }
