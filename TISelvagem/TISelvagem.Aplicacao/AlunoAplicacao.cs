@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TISelvagem.Dominio;
 using TISelvagem.Dominio.Contratos;
+using TiSelvagem.Repositorio;
 
 namespace TISelvagem.Aplicacao
 {
@@ -9,9 +10,9 @@ namespace TISelvagem.Aplicacao
 
         private readonly IRepositorio<Aluno> repositorio;
 
-        public AlunoAplicacao(IRepositorio<Aluno> repo)
+        public AlunoAplicacao()
         {
-            repositorio = repo;
+            repositorio = new AlunoRepositorioADO();
         }
 
         private void Inserir(Aluno aluno)

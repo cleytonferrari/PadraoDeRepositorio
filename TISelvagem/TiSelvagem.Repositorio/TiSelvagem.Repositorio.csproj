@@ -42,6 +42,13 @@
   <ItemGroup>
     <Compile Include="Contexto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AlunoRepositorioADO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TISelvagem.Dominio\TISelvagem.Dominio.csproj">
+      <Project>{a2cc120a-75ad-477a-9eef-5682e9adf1c4}</Project>
+      <Name>TISelvagem.Dominio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
