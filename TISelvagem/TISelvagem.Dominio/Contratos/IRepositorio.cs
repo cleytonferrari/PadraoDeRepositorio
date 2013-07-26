@@ -5,9 +5,9 @@ namespace TISelvagem.Dominio.Contratos
 {
     public interface IRepositorio<T> where T : class
     {
-        void Salvar(T entidade);
+        T Salvar(T entidade);
 
-        void Alterar(T entidade);
+        T Alterar(T entidade);
 
         void Excluir(T entidade);
 

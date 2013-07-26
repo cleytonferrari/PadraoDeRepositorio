@@ -13,7 +13,7 @@ namespace TiSelvagem.Repositorio
     {
         private Contexto contexto;
 
-        public void Salvar(Aluno entidade)
+        public Aluno Salvar(Aluno entidade)
         {
             var strQuery = "";
             strQuery += " INSERT INTO ALUNO (Nome, Mae, DataNascimento) ";
@@ -24,9 +24,11 @@ namespace TiSelvagem.Repositorio
             {
                 contexto.ExecutaComando(strQuery);
             }
+            entidade.Id = 0; //Pegar o id que foi gerado e retornar
+            return entidade;
         }
 
-        public void Alterar(Aluno entidade)
+        public Aluno Alterar(Aluno entidade)
         {
             var strQuery = "";
             strQuery += " UPDATE ALUNO SET ";
@@ -38,6 +40,8 @@ namespace TiSelvagem.Repositorio
             {
                 contexto.ExecutaComando(strQuery);
             }
+
+            return entidade;
         }
 
         public void Excluir(Aluno entidade)

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TISelvagem.Aplicacao", "TIS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TISelvagem.UI.Web", "TISelvagem.UI.Web\TISelvagem.UI.Web.csproj", "{725E0F9B-16FB-4425-A6C2-F06026B06FE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TISelvagem.RepositorioMongo", "TISelvagem.RepositorioMongo\TISelvagem.RepositorioMongo.csproj", "{586157C6-228D-42BF-8018-E13398492DE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{725E0F9B-16FB-4425-A6C2-F06026B06FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{725E0F9B-16FB-4425-A6C2-F06026B06FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{725E0F9B-16FB-4425-A6C2-F06026B06FE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{586157C6-228D-42BF-8018-E13398492DE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{586157C6-228D-42BF-8018-E13398492DE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{586157C6-228D-42BF-8018-E13398492DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{586157C6-228D-42BF-8018-E13398492DE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
