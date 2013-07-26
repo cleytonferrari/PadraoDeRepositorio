@@ -1,4 +1,8 @@
-PadraoDeRepositorio
+Padrão de Repositório
 ===================
 
-Tentando implementar algum padrão para usar vários repositórios, em uma discussão com o Emerson Soares, resolvemos brincar com isso aqui!
+Implementando um sistema com vários repositórios.
+
+	Em um discução no talk com o meu amigo Emerson Soares, fomos discutindo e foi surgindo esse modelo que segue no código!
+	
+Sempre é possivel melhorar, por isso se sabe como tornar isso mais bonito ajude ai!
