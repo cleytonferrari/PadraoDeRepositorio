@@ -12,9 +12,9 @@ namespace TISelvagem.Aplicacao
 
         private readonly IRepositorio<Aluno> repositorio;
 
-        public AlunoAplicacao()
+        public AlunoAplicacao(IRepositorio<Aluno> repo)
         {
-            repositorio = new AlunoRepositorioMongo();
+            repositorio = repo;
         }
 
         private void Inserir(Aluno aluno)
