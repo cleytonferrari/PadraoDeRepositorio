@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TISelvagem.Dominio;
 using TISelvagem.Dominio.Contratos;
+using TISelvagem.RepositorioMongo;
 using TiSelvagem.Repositorio;
 
 namespace TISelvagem.Aplicacao
@@ -12,7 +14,7 @@ namespace TISelvagem.Aplicacao
 
         public AlunoAplicacao()
         {
-            repositorio = new AlunoRepositorioADO();
+            repositorio = new AlunoRepositorioMongo();
         }
 
         private void Inserir(Aluno aluno)
@@ -27,7 +29,10 @@ namespace TISelvagem.Aplicacao
 
         public void Salvar(Aluno aluno)
         {
-            if (aluno.Id > 0)
+            int id;
+            var resultado = Int32.TryParse(aluno.Id, out id);
+
+            if (resultado && id > 0)
                 Alterar(aluno);
             else
                 Inserir(aluno);

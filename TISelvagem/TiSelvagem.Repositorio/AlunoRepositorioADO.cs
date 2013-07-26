@@ -24,7 +24,7 @@ namespace TiSelvagem.Repositorio
             {
                 contexto.ExecutaComando(strQuery);
             }
-            entidade.Id = 0; //Pegar o id que foi gerado e retornar
+            entidade.Id = "0"; //Pegar o id que foi gerado e retornar
             return entidade;
         }
 
@@ -53,7 +53,7 @@ namespace TiSelvagem.Repositorio
             }
         }
 
-        public Aluno Buscar(int id)
+        public Aluno Buscar(string id)
         {
             throw new NotImplementedException();
         }
@@ -80,7 +80,7 @@ namespace TiSelvagem.Repositorio
             {
                 var temObjeto = new Aluno()
                 {
-                    Id = int.Parse(reader["AlunoId"].ToString()),
+                    Id = reader["AlunoId"].ToString(),
                     Nome = reader["Nome"].ToString(),
                     Mae = reader["Mae"].ToString(),
                     DataNascimento = DateTime.Parse(reader["DataNascimento"].ToString())

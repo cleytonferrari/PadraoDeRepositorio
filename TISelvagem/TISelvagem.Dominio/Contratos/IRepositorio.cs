@@ -11,7 +11,7 @@ namespace TISelvagem.Dominio.Contratos
 
         void Excluir(T entidade);
 
-        T Buscar(int id);
+        T Buscar(string id);
 
         IEnumerable<T> BuscarTodos();
 

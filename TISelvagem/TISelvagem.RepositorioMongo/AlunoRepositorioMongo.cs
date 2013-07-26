@@ -9,23 +9,25 @@ namespace TISelvagem.RepositorioMongo
 {
     public class AlunoRepositorioMongo : IRepositorio<Aluno>
     {
-        private readonly Contexto<Aluno> contexto;
+        private readonly Contexto<AlunoDTO> contexto;
 
         public AlunoRepositorioMongo()
         {
-            contexto = new Contexto<Aluno>();
+            contexto = new Contexto<AlunoDTO>();
         }
 
         public Aluno Salvar(Aluno entidade)
         {
-            contexto.Collection.Save(entidade);
-            return entidade;
+            var alunoDto = GetAlunoDto(entidade);
+            contexto.Collection.Save(alunoDto);
+            return GetAluno(alunoDto);
         }
 
         public Aluno Alterar(Aluno entidade)
         {
-            contexto.Collection.Save(entidade);
-            return entidade;
+            var alunoDto = GetAlunoDto(entidade);
+            contexto.Collection.Save(alunoDto);
+            return GetAluno(alunoDto);
         }
 
         public void Excluir(Aluno entidade)
@@ -33,19 +35,50 @@ namespace TISelvagem.RepositorioMongo
             //contexto.Collection.Remove(Query.EQ("_id", new ObjectId(entidade.Id)));
         }
 
-        public Aluno Buscar(int id)
+        public Aluno Buscar(string id)
         {
-            return contexto.Collection.AsQueryable().FirstOrDefault(x => x.Id == id);
+            var alunoDto = contexto.Collection.AsQueryable().FirstOrDefault(x => x.Id == id);
+
+            return GetAluno(alunoDto);
         }
 
         public IEnumerable<Aluno> BuscarTodos()
         {
-            return contexto.Collection.AsQueryable();
+            var listaDto = contexto.Collection.AsQueryable().ToList();
+            foreach (var alunoDTO in listaDto)
+            {
+                var aluno = GetAluno(alunoDTO);
+                yield return aluno;
+            }
         }
 
         public IEnumerable<Aluno> BuscarPorFiltro(Func<Aluno, bool> filtro)
         {
             throw new NotImplementedException();
+        }
+
+        private static AlunoDTO GetAlunoDto(Aluno entidade)
+        {
+            var alunoDto = new AlunoDTO
+            {
+                Id = entidade.Id,
+                Nome = entidade.Nome,
+                Mae = entidade.Mae,
+                DataNascimento = entidade.DataNascimento
+            };
+            return alunoDto;
+        }
+
+        private static Aluno GetAluno(AlunoDTO entidade)
+        {
+            var aluno = new Aluno
+            {
+                Id = entidade.Id,
+                Nome = entidade.Nome,
+                Mae = entidade.Mae,
+                DataNascimento = entidade.DataNascimento
+            };
+            return aluno;
         }
     }
 }

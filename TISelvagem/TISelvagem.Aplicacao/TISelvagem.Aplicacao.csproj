@@ -47,6 +47,10 @@
       <Project>{a2cc120a-75ad-477a-9eef-5682e9adf1c4}</Project>
       <Name>TISelvagem.Dominio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TISelvagem.RepositorioMongo\TISelvagem.RepositorioMongo.csproj">
+      <Project>{586157c6-228d-42bf-8018-e13398492de2}</Project>
+      <Name>TISelvagem.RepositorioMongo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TiSelvagem.Repositorio\TiSelvagem.Repositorio.csproj">
       <Project>{8d8e63c6-cdb6-42cc-92a4-f2d805d8023e}</Project>
       <Name>TiSelvagem.Repositorio</Name>
