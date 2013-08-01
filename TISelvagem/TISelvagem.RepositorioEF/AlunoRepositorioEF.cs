@@ -1,52 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MongoDB.Bson;
-using MongoDB.Driver.Builders;
-using MongoDB.Driver.Linq;
 using TISelvagem.Dominio;
 using TISelvagem.Dominio.Contratos;
 
-namespace TISelvagem.RepositorioMongo
+namespace TISelvagem.RepositorioEF
 {
-    public class AlunoRepositorioMongo : IRepositorio<Aluno>
+    public class AlunoRepositorioEF : IRepositorio<Aluno>
     {
-        private readonly Contexto<AlunoDTO> contexto;
 
-        public AlunoRepositorioMongo()
+        private readonly Contexto contexto;
+
+        public AlunoRepositorioEF()
         {
-            contexto = new Contexto<AlunoDTO>();
+            contexto = new Contexto();
         }
 
         public Aluno Salvar(Aluno entidade)
         {
             var alunoDto = GetAlunoDto(entidade);
-            contexto.Collection.Save(alunoDto);
+            contexto.Alunos.Add(alunoDto);
+            contexto.SaveChanges();
             return GetAluno(alunoDto);
         }
 
         public Aluno Alterar(Aluno entidade)
         {
             var alunoDto = GetAlunoDto(entidade);
-            contexto.Collection.Save(alunoDto);
+
+            AlunoDTO alunoSalvar = contexto.Alunos.First(x => x.Id == alunoDto.Id);
+            alunoSalvar.Nome = entidade.Nome;
+            alunoSalvar.Mae = entidade.Mae;
+            alunoSalvar.DataNascimento = entidade.DataNascimento;
+
+            contexto.SaveChanges();
             return GetAluno(alunoDto);
         }
 
         public void Excluir(Aluno entidade)
         {
-            contexto.Collection.Remove(Query.EQ("_id", new ObjectId(entidade.Id)));
+            var alunoDto = GetAlunoDto(entidade);
+            AlunoDTO alunoExcluir = contexto.Alunos.First(x => x.Id == alunoDto.Id);
+            contexto.Set<AlunoDTO>().Remove(alunoExcluir);
+            contexto.SaveChanges();
         }
 
         public Aluno Buscar(string id)
         {
-            var alunoDto = contexto.Collection.AsQueryable().FirstOrDefault(x => x.Id == id);
+            int idInt;
+            var resultado = Int32.TryParse(id, out idInt);
+
+            var alunoDto = contexto.Alunos.First(x => x.Id == idInt);
 
             return GetAluno(alunoDto);
         }
 
         public IEnumerable<Aluno> BuscarTodos()
         {
-            var listaDto = contexto.Collection.AsQueryable().ToList();
+            var listaDto = contexto.Alunos.ToList();
             foreach (var alunoDTO in listaDto)
             {
                 var aluno = GetAluno(alunoDTO);
@@ -61,9 +72,12 @@ namespace TISelvagem.RepositorioMongo
 
         private static AlunoDTO GetAlunoDto(Aluno entidade)
         {
+            int id;
+            var resultado = Int32.TryParse(entidade.Id, out id);
+
             var alunoDto = new AlunoDTO
             {
-                Id = entidade.Id,
+                Id = id,
                 Nome = entidade.Nome,
                 Mae = entidade.Mae,
                 DataNascimento = entidade.DataNascimento
@@ -75,7 +89,7 @@ namespace TISelvagem.RepositorioMongo
         {
             var aluno = new Aluno
             {
-                Id = entidade.Id,
+                Id = entidade.Id.ToString(),
                 Nome = entidade.Nome,
                 Mae = entidade.Mae,
                 DataNascimento = entidade.DataNascimento

@@ -13,7 +13,7 @@ namespace UI.Dos
     {
         static void Main(string[] args)
         {
-            var appAluno = AlunoAplicaoConstrutor.AlunoAplicacaoADO();
+            var appAluno = AlunoAplicaoConstrutor.AlunoAplicacaoEF();
 
             Console.Write("Digite o nome do aluno: ");
             string nome = Console.ReadLine();

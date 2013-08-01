@@ -14,7 +14,7 @@ namespace TISelvagem.UI.Web.Controllers
 
         public ActionResult Index()
         {
-            var appAluno = AlunoAplicaoConstrutor.AlunoAplicacaoADO();
+            var appAluno = AlunoAplicaoConstrutor.AlunoAplicacaoEF();
             var listaDeAlunos = appAluno.ListarTodos();
             return View(listaDeAlunos);
         }

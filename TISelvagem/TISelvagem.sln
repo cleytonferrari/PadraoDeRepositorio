@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DC7761
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TISelvagem.RepositorioEF", "TISelvagem.RepositorioEF\TISelvagem.RepositorioEF.csproj", "{0D75A13D-0BED-4ED2-978F-34976102B85F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{586157C6-228D-42BF-8018-E13398492DE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{586157C6-228D-42BF-8018-E13398492DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{586157C6-228D-42BF-8018-E13398492DE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D75A13D-0BED-4ED2-978F-34976102B85F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D75A13D-0BED-4ED2-978F-34976102B85F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D75A13D-0BED-4ED2-978F-34976102B85F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D75A13D-0BED-4ED2-978F-34976102B85F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
